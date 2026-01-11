@@ -8,8 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Flatpickr (pour le calendrier) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <style>
         /* Styles personnalisés */
         body {
@@ -70,6 +70,30 @@
         .whatsapp-btn:hover {
             background-color: #128C7E;
             border-color: #128C7E;
+        }
+        
+        .facebook-btn {
+            background-color: #1877F2;
+            border-color: #1877F2;
+            color: white;
+        }
+        
+        .facebook-btn:hover {
+            background-color: #166FE5;
+            border-color: #166FE5;
+            color: white;
+        }
+        
+        .share-btn {
+            background-color: #6f42c1;
+            border-color: #6f42c1;
+            color: white;
+        }
+        
+        .share-btn:hover {
+            background-color: #5e33b1;
+            border-color: #5e33b1;
+            color: white;
         }
         
         .action-buttons {
@@ -512,6 +536,7 @@
         
         .date-input-group .form-control {
             padding-right: 40px;
+            cursor: pointer;
         }
         
         .calendar-toggle {
@@ -524,43 +549,6 @@
             color: #6c757d;
             cursor: pointer;
             z-index: 5;
-        }
-        
-        /* Personnalisation du calendrier Flatpickr */
-        .flatpickr-calendar {
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-            border: none;
-        }
-        
-        .flatpickr-day.selected {
-            background: #0d6efd;
-            border-color: #0d6efd;
-        }
-        
-        .flatpickr-day.today {
-            border-color: #0d6efd;
-        }
-        
-        .flatpickr-day.today:hover {
-            background: #0d6efd;
-            color: white;
-        }
-        
-        .flatpickr-months .flatpickr-month {
-            color: #0d6efd;
-        }
-        
-        .flatpickr-months .flatpickr-next-month:hover, 
-        .flatpickr-months .flatpickr-prev-month:hover {
-            color: #0a58ca;
-        }
-        
-        .age-display {
-            font-size: 0.85rem;
-            color: #6c757d;
-            margin-top: 5px;
-            font-style: italic;
         }
         
         /* Messages d'alerte */
@@ -843,6 +831,303 @@
             background-color: #bb2d3b;
             border-color: #b02a37;
         }
+        
+        /* Styles pour le bouton de partage dans le header */
+        .share-header-btn {
+            margin-left: 10px;
+        }
+        
+        /* Modal pour le partage */
+        .share-modal .modal-body {
+            text-align: center;
+        }
+        
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .share-buttons .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            font-size: 1.1rem;
+            flex: 1;
+        }
+        
+        .share-message {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid #0d6efd;
+        }
+        
+        .share-message p {
+            margin-bottom: 0;
+            font-style: italic;
+        }
+        
+        /* Style pour le champ date de naissance avec SweetAlert2 */
+        .date-input-swal {
+            cursor: pointer;
+            background-color: white;
+        }
+        
+        /* Styles pour le formulaire de date amélioré */
+        .birthday-form {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .birthday-form .form-label {
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .birthday-form .form-control {
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .birthday-separator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #6c757d;
+        }
+        
+        .birthday-btn {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1rem;
+        }
+        
+        /* Animation pour l'affichage de l'âge */
+        .age-result {
+            background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Style pour le sélecteur d'année amélioré */
+        .year-select-container {
+            position: relative;
+        }
+        
+        .year-select-container .form-control {
+            cursor: pointer;
+        }
+        
+        /* Style pour les champs de date individuelle */
+        .date-field {
+            text-align: center;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        
+        .date-field::placeholder {
+            color: #adb5bd;
+            font-weight: normal;
+        }
+        
+        /* Header buttons container - MODIFICATION PRINCIPALE */
+        .header-buttons-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-left: auto;
+            white-space: nowrap;
+        }
+        
+        .header-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            min-width: fit-content;
+        }
+        
+        .header-btn i {
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+        
+        /* Bouton Déposer un CV - PLUS LARGE SUR MOBILE */
+        .btn-deposer-cv {
+            min-width: 140px; /* Largeur minimale pour afficher tout le texte */
+        }
+        
+        /* Bouton Partager - taille normale */
+        .btn-partager {
+            min-width: 100px;
+        }
+        
+        /* Ajustement pour les petits écrans */
+        @media (max-width: 768px) {
+            .header-buttons-container {
+                margin-left: auto;
+                gap: 8px;
+            }
+            
+            .navbar .container {
+                flex-wrap: nowrap;
+            }
+            
+            .navbar-brand {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 130px; /* Réduit pour laisser plus de place aux boutons */
+            }
+            
+            .header-btn {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+            
+            .header-btn i {
+                margin-right: 6px;
+                font-size: 0.9rem;
+            }
+            
+            /* Bouton Déposer un CV - encore plus large sur mobile */
+            .btn-deposer-cv {
+                min-width: 150px;
+                padding: 6px 14px;
+            }
+            
+            .btn-partager {
+                min-width: 90px;
+            }
+            
+            .share-buttons {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .navbar-brand {
+                max-width: 110px;
+                font-size: 1rem;
+            }
+            
+            .header-buttons-container {
+                gap: 6px;
+            }
+            
+            .header-btn {
+                padding: 5px 10px;
+                font-size: 0.8rem;
+            }
+            
+            .header-btn i {
+                margin-right: 4px;
+                font-size: 0.85rem;
+            }
+            
+            /* Bouton Déposer un CV - largeur optimale pour mobile */
+            .btn-deposer-cv {
+                min-width: 145px;
+                padding: 5px 12px;
+            }
+            
+            .btn-partager {
+                min-width: 85px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .navbar-brand {
+                max-width: 90px;
+                font-size: 0.9rem;
+            }
+            
+            .header-buttons-container {
+                gap: 4px;
+            }
+            
+            .header-btn {
+                padding: 4px 8px;
+                font-size: 0.75rem;
+                min-width: auto;
+            }
+            
+            .header-btn i {
+                margin-right: 3px;
+                font-size: 0.8rem;
+            }
+            
+            /* Bouton Déposer un CV - largeur maximale sur très petit écran */
+            .btn-deposer-cv {
+                min-width: 140px;
+                padding: 4px 10px;
+            }
+            
+            .btn-partager {
+                min-width: 80px;
+                padding: 4px 6px;
+            }
+            
+            /* Ajustement pour s'assurer que le texte est complet */
+            .header-btn span {
+                white-space: nowrap;
+                overflow: visible;
+                text-overflow: clip;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            /* Pour les très petits écrans comme iPhone SE */
+            .navbar-brand {
+                max-width: 80px;
+                font-size: 0.85rem;
+            }
+            
+            .header-buttons-container {
+                gap: 3px;
+            }
+            
+            .btn-deposer-cv {
+                min-width: 135px;
+                padding: 4px 8px;
+                font-size: 0.7rem;
+            }
+            
+            .btn-partager {
+                min-width: 75px;
+                padding: 4px 5px;
+                font-size: 0.7rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -885,13 +1170,19 @@
 
     <!-- Header fixe -->
     <header class="fixed-header navbar navbar-dark bg-primary">
-        <div class="container">
+        <div class="container d-flex justify-content-between align-items-center">
             <span class="navbar-brand mb-0 h1">
                 <i class="fas fa-user-tie me-2"></i>Le CV
             </span>
-            <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#cvModal">
-                <i class="fas fa-plus me-1"></i> Déposer un CV
-            </button>
+            <!-- MODIFICATION ICI - Les deux boutons sur la même ligne avec classes spécifiques -->
+            <div class="header-buttons-container">
+                <button class="btn btn-light header-btn btn-partager" data-bs-toggle="modal" data-bs-target="#shareModal">
+                    <i class="fas fa-share-alt"></i><span>Partager</span>
+                </button>
+                <button class="btn btn-light header-btn btn-deposer-cv" data-bs-toggle="modal" data-bs-target="#cvModal">
+                    <i class="fas fa-plus"></i><span>Déposer un CV</span>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -925,6 +1216,52 @@
             <span class="text-muted">© 2026 Le CV - Created by : M.Seddik Elidrissi</span>
         </div>
     </footer>
+
+    <!-- Modal pour partager le site -->
+    <div class="modal fade share-modal" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="shareModalLabel"><i class="fas fa-share-alt me-2"></i>Partager ce site</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="lead">🎉 <strong>Découvrez cette plateforme de recrutement !</strong></p>
+                    
+                    <div class="share-message">
+                        <p>👋 Salut !<br>
+                        J'ai trouvé cette plateforme géniale appelée <strong>Le CV</strong> qui met en relation employeurs et chercheurs d'emploi.</p>
+                        
+                        <p>📌 <strong>Ce que vous pouvez y faire :</strong><br>
+                        • Déposer votre CV gratuitement<br>
+                        • Trouver des talents pour votre entreprise<br>
+                        • Filtrer les CV par ville<br>
+                        • Contacter directement les candidats</p>
+                        
+                        <p>🔗 <strong>Lien du site :</strong><br>
+                        https://lecv.vercel.app</p>
+                        
+                        <p>À partager avec vos contacts ! 🚀</p>
+                    </div>
+                    
+                    <div class="share-buttons">
+                        <button class="btn whatsapp-btn" id="shareWhatsApp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </button>
+                        <button class="btn facebook-btn" id="shareFacebook">
+                            <i class="fab fa-facebook"></i> Facebook
+                        </button>
+                        <button class="btn btn-secondary" id="copyLink">
+                            <i class="fas fa-copy"></i> Copier lien
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Modal pour ajouter un CV -->
     <div class="modal fade" id="cvModal" tabindex="-1" aria-labelledby="cvModalLabel" aria-hidden="true">
@@ -1002,7 +1339,7 @@
                             <div class="input-highlight">
                                 <div class="date-input-group">
                                     <div class="floating-label">
-                                        <input type="text" class="form-control" id="dateNaissance" placeholder=" " required>
+                                        <input type="text" class="form-control date-input-swal" id="dateNaissance" placeholder=" " required readonly>
                                         <label for="dateNaissance"><i class="fas fa-birthday-cake"></i> Date de naissance</label>
                                         <button type="button" class="calendar-toggle" id="calendarToggle">
                                             <i class="fas fa-calendar-alt"></i>
@@ -1093,9 +1430,8 @@
     <!-- Bootstrap & jQuery JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Flatpickr JS -->
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <script>
         $(document).ready(function() {
@@ -1178,25 +1514,19 @@
                 }, 500);
             };
             
-            // Configuration du calendrier Flatpickr
-            const datePicker = flatpickr("#dateNaissance", {
-                locale: "fr",
-                dateFormat: "d/m/Y",
-                maxDate: "today",
-                onChange: function(selectedDates, dateStr, instance) {
-                    calculateAge(selectedDates[0]);
-                }
-            });
-            
-            // Ouvrir le calendrier en cliquant sur l'icône
-            $("#calendarToggle").click(function() {
-                datePicker.open();
-            });
-            
             // Fonction pour calculer l'âge
-            function calculateAge(birthDate) {
-                if (!birthDate) return;
+            function calculateAge(birthDateStr) {
+                if (!birthDateStr) return null;
                 
+                // Convertir la date du format dd/mm/yyyy en objet Date
+                const parts = birthDateStr.split('/');
+                if (parts.length !== 3) return null;
+                
+                const day = parseInt(parts[0], 10);
+                const month = parseInt(parts[1], 10) - 1;
+                const year = parseInt(parts[2], 10);
+                
+                const birthDate = new Date(year, month, day);
                 const today = new Date();
                 let age = today.getFullYear() - birthDate.getFullYear();
                 const monthDiff = today.getMonth() - birthDate.getMonth();
@@ -1205,8 +1535,208 @@
                     age--;
                 }
                 
-                $("#ageDisplay").text(`Âge: ${age} ans`);
+                return age;
             }
+            
+            // Fonction pour ouvrir le formulaire de date de naissance amélioré
+            function openBirthdayForm() {
+                // Récupérer l'année actuelle
+                const currentYear = new Date().getFullYear();
+                
+                // Générer les options d'années (de l'année actuelle à 1900)
+                let yearOptions = '';
+                for (let year = currentYear; year >= 1900; year--) {
+                    yearOptions += `<option value="${year}">${year}</option>`;
+                }
+                
+                // Générer les options de jours
+                let dayOptions = '<option value="">Jour</option>';
+                for (let day = 1; day <= 31; day++) {
+                    dayOptions += `<option value="${day}">${day}</option>`;
+                }
+                
+                Swal.fire({
+                    title: 'Date de naissance',
+                    html: `
+                        <div class="birthday-form">
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <label class="form-label">Jour</label>
+                                    <select class="form-control date-field" id="swalBirthDay">
+                                        ${dayOptions}
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <label class="form-label">Mois</label>
+                                    <select class="form-control date-field" id="swalBirthMonth">
+                                        <option value="">Mois</option>
+                                        <option value="1">Janvier</option>
+                                        <option value="2">Février</option>
+                                        <option value="3">Mars</option>
+                                        <option value="4">Avril</option>
+                                        <option value="5">Mai</option>
+                                        <option value="6">Juin</option>
+                                        <option value="7">Juillet</option>
+                                        <option value="8">Août</option>
+                                        <option value="9">Septembre</option>
+                                        <option value="10">Octobre</option>
+                                        <option value="11">Novembre</option>
+                                        <option value="12">Décembre</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <label class="form-label">Année</label>
+                                    <div class="year-select-container">
+                                        <select class="form-control date-field" id="swalBirthYear">
+                                            <option value="">Année</option>
+                                            ${yearOptions}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="birthdayResult" style="display: none;"></div>
+                        </div>
+                    `,
+                    showCancelButton: true,
+                    confirmButtonText: 'Valider',
+                    cancelButtonText: 'Annuler',
+                    width: 500,
+                    didOpen: () => {
+                        // Si une date existe déjà, la pré-remplir
+                        const currentDate = $('#dateNaissance').val();
+                        if (currentDate) {
+                            const parts = currentDate.split('/');
+                            if (parts.length === 3) {
+                                $('#swalBirthDay').val(parts[0]);
+                                $('#swalBirthMonth').val(parts[1]);
+                                $('#swalBirthYear').val(parts[2]);
+                                updateBirthdayResult();
+                            }
+                        }
+                        
+                        // Mettre à jour le résultat quand les champs changent
+                        $('#swalBirthDay, #swalBirthMonth, #swalBirthYear').change(function() {
+                            updateBirthdayResult();
+                        });
+                        
+                        // Fonction pour mettre à jour l'affichage du résultat
+                        function updateBirthdayResult() {
+                            const day = $('#swalBirthDay').val();
+                            const month = $('#swalBirthMonth').val();
+                            const year = $('#swalBirthYear').val();
+                            
+                            if (day && month && year) {
+                                // Vérifier si la date est valide
+                                const date = new Date(year, month - 1, day);
+                                const today = new Date();
+                                
+                                if (isNaN(date.getTime())) {
+                                    $('#birthdayResult').html(`
+                                        <div class="alert alert-danger">
+                                            Date invalide
+                                        </div>
+                                    `).show();
+                                    return;
+                                }
+                                
+                                if (date > today) {
+                                    $('#birthdayResult').html(`
+                                        <div class="alert alert-danger">
+                                            La date ne peut pas être dans le futur
+                                        </div>
+                                    `).show();
+                                    return;
+                                }
+                                
+                                // Formater la date
+                                const formattedDay = day.padStart(2, '0');
+                                const formattedMonth = month.padStart(2, '0');
+                                const formattedDate = `${formattedDay}/${formattedMonth}/${year}`;
+                                
+                                // Calculer l'âge
+                                const age = calculateAge(formattedDate);
+                                
+                                if (age !== null) {
+                                    // Obtenir le nom du mois
+                                    const monthNames = [
+                                        'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
+                                        'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
+                                    ];
+                                    const monthName = monthNames[month - 1];
+                                    
+                                    $('#birthdayResult').html(`
+                                        <div class="age-result">
+                                            <div>${day} ${monthName} ${year}</div>
+                                            <div style="font-size: 1rem; margin-top: 5px;">
+                                                Âge: ${age} ans
+                                            </div>
+                                        </div>
+                                    `).show();
+                                }
+                            } else {
+                                $('#birthdayResult').hide();
+                            }
+                        }
+                    },
+                    preConfirm: () => {
+                        const day = $('#swalBirthDay').val();
+                        const month = $('#swalBirthMonth').val();
+                        const year = $('#swalBirthYear').val();
+                        
+                        if (!day || !month || !year) {
+                            Swal.showValidationMessage('Veuillez sélectionner le jour, le mois et l\'année');
+                            return false;
+                        }
+                        
+                        // Validation de la date
+                        const date = new Date(year, month - 1, day);
+                        const today = new Date();
+                        
+                        if (isNaN(date.getTime())) {
+                            Swal.showValidationMessage('Date invalide');
+                            return false;
+                        }
+                        
+                        // Vérifier que la date n'est pas dans le futur
+                        if (date > today) {
+                            Swal.showValidationMessage('La date de naissance ne peut pas être dans le futur');
+                            return false;
+                        }
+                        
+                        // Vérifier les années extrêmes
+                        if (year < 1900 || year > currentYear) {
+                            Swal.showValidationMessage('Année invalide');
+                            return false;
+                        }
+                        
+                        // Formater la date au format dd/mm/yyyy
+                        const formattedDay = day.padStart(2, '0');
+                        const formattedMonth = month.padStart(2, '0');
+                        
+                        return `${formattedDay}/${formattedMonth}/${year}`;
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed && result.value) {
+                        $('#dateNaissance').val(result.value);
+                        const age = calculateAge(result.value);
+                        if (age !== null) {
+                            $('#ageDisplay').text(`Âge: ${age} ans`);
+                        }
+                    }
+                });
+            }
+            
+            // Ouvrir le formulaire de date amélioré en cliquant sur le champ date
+            $('#dateNaissance, #calendarToggle').click(function() {
+                openBirthdayForm();
+            });
             
             // Afficher le message important après 3 secondes
             setTimeout(function() {
@@ -1302,15 +1832,7 @@
                 
                 shuffledCVs.forEach((cv, index) => {
                     // Calculer l'âge à partir de la date de naissance
-                    const naissanceDate = cv.dateNaissance.split('/');
-                    const birthDate = new Date(naissanceDate[2], naissanceDate[1] - 1, naissanceDate[0]);
-                    const today = new Date();
-                    let age = today.getFullYear() - birthDate.getFullYear();
-                    const monthDiff = today.getMonth() - birthDate.getMonth();
-                    
-                    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-                        age--;
-                    }
+                    const age = calculateAge(cv.dateNaissance) || 'N/A';
                     
                     const card = `
                         <div class="col-md-6 col-lg-4 card-spacing">
@@ -1377,15 +1899,7 @@
                 }
                 
                 // Calculer l'âge
-                const naissanceDate = cv.dateNaissance.split('/');
-                const birthDate = new Date(naissanceDate[2], naissanceDate[1] - 1, naissanceDate[0]);
-                const today = new Date();
-                let age = today.getFullYear() - birthDate.getFullYear();
-                const monthDiff = today.getMonth() - birthDate.getMonth();
-                
-                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-                    age--;
-                }
+                const age = calculateAge(cv.dateNaissance) || 'N/A';
                 
                 // Formater les compétences en badges
                 const competencesArray = cv.competences.split(',').map(item => item.trim());
@@ -1548,6 +2062,56 @@
             $('.floating-label .form-control').on('input', function() {
                 // Cette fonction s'assure que le texte est toujours visible
                 $(this).css('color', '#212529');
+            });
+            
+            // ========== FONCTIONNALITÉS DE PARTAGE ==========
+            
+            // Lien du site
+            const siteUrl = 'https://lecv.vercel.app';
+            
+            // Nouveau message de partage pour les visiteurs (pas l'admin)
+            const shareMessage = `🌟 *Découvrez "Le CV" - Plateforme de recrutement gratuite !* 🌟
+
+👋 Je viens de découvrir ce site génial pour trouver un emploi ou recruter !
+
+📌 *Ce que vous pouvez faire sur "Le CV" :*
+• Déposer votre CV gratuitement
+• Trouver des talents pour votre entreprise
+• Filtrer les CV par ville
+• Contacter directement les candidats
+• Interface simple et intuitive
+
+🔗 *Lien du site :*
+${siteUrl}
+
+💡 Parfait si vous cherchez du travail ou si vous recrutez pour votre entreprise !
+
+👉 Partagez avec vos contacts qui pourraient être intéressés !`;
+
+            // Partager sur WhatsApp
+            $('#shareWhatsApp').click(function() {
+                const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`;
+                window.open(whatsappUrl, '_blank');
+                $('#shareModal').modal('hide');
+                showAlert('Partage sur WhatsApp ouvert!', 'success', 3000);
+            });
+            
+            // Partager sur Facebook
+            $('#shareFacebook').click(function() {
+                const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(siteUrl)}&quote=${encodeURIComponent('Découvrez "Le CV" - Plateforme de recrutement gratuite !')}`;
+                window.open(facebookUrl, '_blank', 'width=600,height=400');
+                $('#shareModal').modal('hide');
+                showAlert('Partage sur Facebook ouvert!', 'success', 3000);
+            });
+            
+            // Copier le lien
+            $('#copyLink').click(function() {
+                navigator.clipboard.writeText(siteUrl).then(function() {
+                    showAlert('Lien copié dans le presse-papier!', 'success', 3000);
+                    $('#shareModal').modal('hide');
+                }).catch(function(err) {
+                    showAlert('Erreur lors de la copie du lien', 'error', 3000);
+                });
             });
         });
     </script>
